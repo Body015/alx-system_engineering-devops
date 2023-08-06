@@ -1,3 +1,11 @@
 #!/bin/bash
-chown --from=guillaume betty hello
 
+filename="hello"
+current_owner=$(stat -c %U "$filename")
+
+if [ "$current_owner" = "guillaume" ]; then
+    chown betty "$filename"
+    echo "Owner of $filename has been changed to betty."
+else
+    echo "The file $filename is not owned by guillaume."
+fi
